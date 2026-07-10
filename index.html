@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サマーフェスティバルHAKUSAN2026</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Color Palette & Variables --- */
+        :root {
+            --primary-color: #2e7d32;      /* 鮮やかな緑（自然と活気） */
+            --primary-light: #e8f5e9;      /* 薄い緑（背景用） */
+            --primary-dark: #1b5e20;       /* 深い緑 */
+            --accent-color: #ff9800;       /* 元気なオレンジ（ワイワイした賑やかさ） */
+            --accent-pink: #e91e63;        /* 楽しさを引き立てるピンク */
+            --text-color: #333333;
+            --white: #ffffff;
+            --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+            --font-base: 'Noto Sans JP', sans-serif;
+        }
+
+        /* --- Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-base);
+            color: var(--text-color);
+            background-color: var(--white);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- Shared Components --- */
+        .section-title {
+            font-family: var(--font-rounded);
+            font-weight: 900;
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 5px;
+        }
+
+        .btn-common {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: var(--font-rounded);
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: var(--white);
+            background: linear-gradient(45deg, var(--accent-color), #ffb74d);
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-common:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 152, 0, 0.6);
+        }
+
+        /* --- Animation Styles --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s forwards cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* --- Header / Hero Section --- */
+        header {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            padding: 0 20px;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--accent-pink);
+            color: var(--white);
+            font-family: var(--font-rounded);
+            font-weight: 700;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero-title {
+            font-family: var(--font-rounded);
+            font-weight: 900;
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.6);
+            word-wrap: break-word;
+        }
+
+        .hero-catch {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: #fffde7;
+            text-shadow: 1px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .hero-info-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-info-box p {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0.3rem 0;
+        }
+
+        .hero-info-box i {
+            margin-right: 8px;
+            color: var(--accent-color);
+        }
+
+        /* --- Feature Section --- */
+        #features {
+            padding: 6rem 20px;
+            background-color: var(--primary-light);
+            position: relative;
+        }
+
+        .feature-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .feature-img {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .feature-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-tag {
+            font-family: var(--font-rounded);
+            font-weight: 900;
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .feature-desc {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        /* --- Events / Schedule Section --- */
+        #events {
+            padding: 6rem 20px;
+            background-color: var(--white);
+        }
+
+        .events-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .event-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border: 2px solid var(--primary-light);
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(46, 125, 50, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .event-img {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .event-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .event-card:hover .event-img img {
+            transform: scale(1.1);
+        }
+
+        .event-body {
+            padding: 2rem;
+        }
+
+        .event-badge {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .event-card:nth-child(2) .event-badge {
+            background-color: var(--accent-color);
+        }
+
+        .event-card:nth-child(3) .event-badge {
+            background-color: var(--accent-pink);
+        }
+
+        .event-card-title {
+            font-family: var(--font-rounded);
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .event-card-text {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* --- Access Section --- */
+        #access {
+            padding: 6rem 20px;
+            background-color: var(--primary-light);
+        }
+
+        .access-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--white);
+            border-radius: 30px;
+            padding: 3.5rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+        }
+
+        .access-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .access-block h3 {
+            font-family: var(--font-rounded);
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.5rem;
+        }
+
+        .access-block h3 i {
+            color: var(--primary-color);
+        }
+
+        .access-method {
+            margin-bottom: 1.5rem;
+        }
+
+        .access-method-title {
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .access-method-text {
+            color: #555;
+            padding-left: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .parking-box {
+            grid-column: span 2;
+            background-color: #fff9c4;
+            border-left: 5px solid #fbc02d;
+            padding: 1.5rem;
+            border-radius: 0 15px 15px 0;
+            margin-top: 1rem;
+        }
+
+        .parking-box h4 {
+            font-family: var(--font-rounded);
+            color: #f57f17;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .parking-box p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* --- Footer Section --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 20px;
+            position: relative;
+        }
+
+        .footer-logo {
+            font-family: var(--font-rounded);
+            font-weight: 900;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .footer-sns {
+            margin-bottom: 2rem;
+        }
+
+        .footer-sns a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            background: rgba(255,255,255,0.1);
+            width: 50px;
+            height: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-sns a:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .footer-link-btn {
+            margin-bottom: 2rem;
+        }
+
+        .footer-link-btn a {
+            color: var(--white);
+            border: 2px solid var(--white);
+            padding: 0.5rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link-btn a:hover {
+            background-color: var(--white);
+            color: var(--primary-dark);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+        }
+
+        /* --- Responsive Styles --- */
+        @media (max-width: 968px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .hero-catch {
+                font-size: 1.4rem;
+            }
+            .feature-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .access-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .parking-box {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .access-container {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Hero Section -->
+    <header>
+        <div class="hero-container fade-in">
+            <span class="hero-badge">入場無料</span>
+            <h1 class="hero-title">サマーフェスティバル<br>HAKUSAN2026</h1>
+            <p class="hero-catch">子供も大人も盛り上がろう</p>
+            
+            <div class="hero-info-box">
+                <p><i class="fa-solid fa-calendar-days"></i> 2026年8月30日（日）</p>
+                <p><i class="fa-solid fa-map-location-dot"></i> 松任総合運動公園</p>
+            </div>
+            
+            <div>
+                <a href="#events" class="btn-common">イベント内容を見る</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 祭りの特徴 Section -->
+    <section id="features">
+        <div class="feature-container">
+            <div class="feature-img fade-in delay-1">
+                <img src="https://images.unsplash.com/photo-1464305795204-6f5bdf7afd51?auto=format&fit=crop&w=600&q=80" alt="笑顔で楽しむ家族">
+            </div>
+            <div class="feature-content fade-in delay-2">
+                <h2 class="feature-tag">子供から大人まで、<br>誰もが主役になれる最高の夏。</h2>
+                <p class="feature-desc">
+                    「サマーフェスティバルHAKUSAN2026」は、親子連れを中心にみんなでワイワイ盛り上がれる、熱気にあふれた夏のスペシャルイベントです！広々とした松任総合運動公園を舞台に、一日中笑顔が絶えないプログラムをたっぷりご用意して皆様をお待ちしています。
+                </p>
+                <a href="#access" class="btn-common" style="background: linear-gradient(45deg, var(--primary-color), #66bb6a); box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);">アクセス情報を確認</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- イベントスケジュール・出し物 Section -->
+    <section id="events">
+        <h2 class="section-title">主要プログラム</h2>
+        <div class="events-grid">
+            
+            <!-- イベント1 -->
+            <div class="event-card fade-in delay-1">
+                <div class="event-img">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80" alt="白山グルメストリートのイメージ">
+                </div>
+                <div class="event-body">
+                    <span class="event-badge">フード</span>
+                    <h3 class="event-card-title">白山グルメストリート</h3>
+                    <p class="event-card-text">地元の美味しいものが大集合！屋台ならではのメニューから特別な絶品グルメまで、お腹いっぱい堪能してワイワイ盛り上がりましょう！</p>
+                </div>
+            </div>
+
+            <!-- イベント2 -->
+            <div class="event-card fade-in delay-2">
+                <div class="event-img">
+                    <img src="https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?auto=format&fit=crop&w=500&q=80" alt="キッズプログラムのイメージ">
+                </div>
+                <div class="event-body">
+                    <span class="event-badge">キッズ</span>
+                    <h3 class="event-card-title">キッズプログラム</h3>
+                    <p class="event-card-text">お子様が夢中になれる遊びや体験型アクティビティが満載！親子で一緒に思い出に残る楽しいひとときを過ごせます。</p>
+                </div>
+            </div>
+
+            <!-- イベント3 -->
+            <div class="event-card fade-in delay-3">
+                <div class="event-img">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=500&q=80" alt="ステージプログラムのイメージ">
+                </div>
+                <div class="event-body">
+                    <span class="event-badge">ステージ</span>
+                    <h3 class="event-card-title">ステージプログラム</h3>
+                    <p class="event-card-text">会場全体を熱気に包む、迫力満点のライブパフォーマンスやダンスステージ！みんなで手拍子をして、最高の興奮を体感してください！</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- アクセス情報 Section -->
+    <section id="access">
+        <h2 class="section-title">アクセス情報</h2>
+        <div class="access-container fade-in">
+            <div class="access-grid">
+                
+                <!-- 電車でのアクセス -->
+                <div class="access-block">
+                    <h3><i class="fa-solid fa-train"></i> 電車でご来場の場合</h3>
+                    <div class="access-method">
+                        <p class="access-method-title">JR北陸本線 松任駅下車</p>
+                        <p class="access-method-text">→ バスで約6分「総合運動公園東口」停留所から徒歩1分</p>
+                    </div>
+                </div>
+
+                <!-- お車でのアクセス -->
+                <div class="access-block">
+                    <h3><i class="fa-solid fa-car"></i> お車でご来場の場合</h3>
+                    <div class="access-method">
+                        <p class="access-method-title">北陸自動車道 徳光PAから10分</p>
+                        <p class="access-method-text">※ETCのみ利用可</p>
+                    </div>
+                    <div class="access-method">
+                        <p class="access-method-title">北陸自動車道 美川ICから15分</p>
+                    </div>
+                    <div class="access-method">
+                        <p class="access-method-title">北陸自動車道 白山ICから15分</p>
+                    </div>
+                </div>
+
+                <!-- 駐車場情報 -->
+                <div class="parking-box">
+                    <h4><i class="fa-solid fa-square-p"></i> 無料駐車場のご案内</h4>
+                    <p>運動公園内、白山市役所、公立松任石川中央病院職員駐車場、総合運動公園前駐車場にて無料駐車場をご用意しております。当日は混雑が予想されますので、お早めにお越しください。</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター Section -->
+    <footer>
+        <div class="footer-logo">サマーフェスティバルHAKUSAN2026</div>
+        <p style="margin-bottom: 1.5rem; opacity: 0.9;">子供も大人も盛り上がろう！皆様のご来場を心よりお待ちしております。</p>
+        
+        <div class="footer-link-btn">
+            <a href="https://summer-fes.com/" target="_blank" rel="noopener noreferrer">公式サイトを見る</a>
+        </div>
+
+        <div class="footer-sns">
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+
+        <div class="copyright">
+            &copy; 2026 サマーフェスティバルHAKUSAN 実行委員会. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Simple Intersection Observer for Scroll Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        // 元々クラスが付いた時点で動くよう、初期値を調整
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // アニメーションさせたい要素を初期状態で不透明度0にして監視
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.opacity = '0';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
